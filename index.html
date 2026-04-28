@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Porto.Folio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-brand">Porto<span>Folio</span></div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#portofolio">Portofolio</a>
+            <a href="#inventory">Inventory</a>
+            <a href="#" onclick="bukaAdmin()">Admin Dashboard</a>
+        </div>
+    </nav>
+
+    <!-- ================================================
+         1. IDENTITY SECTION
+    ================================================ -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <img
+                src="pasfoto.JPG"
+                alt="Foto Profil"
+                class="foto-profil"
+                onerror="this.src='https://via.placeholder.com/150?text=Foto'"
+            >
+            <h1>Halo, Saya <span>M DAFFA AL AYUBI</span></h1>
+            <p class="subtitle">Web Developer | SMKN 2 Banjarmasin</p>
+            <p class="bio">"Belajar hal baru setiap hari"</p>
+        </div>
+    </section>
+
+    <!-- ================================================
+         2. PORTFOLIO GALLERY
+         J.620100.017.02 - Filter Logic
+    ================================================ -->
+    <section id="portofolio" class="section-porto">
+        <h2>My Recent Projects</h2>
+        <div class="filters">
+            <button class="filter-btn active" data-kat="All" onclick="filterProyek('All')">All Projects</button>
+            <button class="filter-btn" data-kat="Web"    onclick="filterProyek('Web')">Web</button>
+            <button class="filter-btn" data-kat="Mobile" onclick="filterProyek('Mobile')">Mobile</button>
+            <button class="filter-btn" data-kat="IoT"    onclick="filterProyek('IoT')">IoT</button>
+        </div>
+        <div id="proyekList" class="grid"></div>
+    </section>
+
+    <!-- ================================================
+         3. INVENTORY SECTION (Public - Read Only)
+         J.620100.017.02 - Filter Logic
+    ================================================ -->
+    <section id="inventory" class="section-inventory">
+        <h2>Lab Inventory</h2>
+        <div class="filters">
+            <button class="filter-btn active" data-inv="Semua" onclick="filterInventory('Semua')">Semua</button>
+            <button class="filter-btn" data-inv="PC"         onclick="filterInventory('PC')">PC</button>
+            <button class="filter-btn" data-inv="Laptop"     onclick="filterInventory('Laptop')">Laptop</button>
+            <button class="filter-btn" data-inv="Networking" onclick="filterInventory('Networking')">Networking</button>
+        </div>
+        <div id="inventoryList" class="grid"></div>
+    </section>
+
+    <!-- ================================================
+         4. HALAMAN LOGIN (tersembunyi, muncul saat klik Admin)
+         J.620100.010.01 - Form Handling
+    ================================================ -->
+    <div id="loginOverlay" class="overlay" style="display:none;">
+        <div class="login-box">
+            <h3>Admin Login</h3>
+            <p class="login-sub">Masuk untuk mengelola inventory</p>
+            <form id="loginForm">
+                <input type="text"     id="loginUser" placeholder="Username" required>
+                <input type="password" id="loginPass" placeholder="Password" required>
+                <div id="loginError" class="error-msg" style="display:none;">Username atau password salah!</div>
+                <button type="submit">Login</button>
+                <button type="button" class="btn-batal" onclick="tutupLogin()">Batal</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ================================================
+         5. ADMIN DASHBOARD (tersembunyi, muncul setelah login)
+         J.620100.010.01 - Form Handling & Event Listener
+    ================================================ -->
+    <section id="adminDashboard" class="section-admin" style="display:none;">
+        <div class="admin-box">
+            <div class="admin-header">
+                <h2>Admin Dashboard</h2>
+                <button onclick="logout()" class="btn-logout">Logout</button>
+            </div>
+            <p class="admin-sub">Tambah dan kelola perangkat lab</p>
+
+            <form id="inventoryForm">
+                <input type="text" id="itemName"   placeholder="Nama Perangkat" required>
+                <input type="text" id="itemImg"    placeholder="URL Foto (https://...)" required>
+                <select id="itemCat">
+                    <option value="PC">PC Desktop</option>
+                    <option value="Laptop">Laptop</option>
+                    <option value="Networking">Networking</option>
+                </select>
+                <select id="itemStatus">
+                    <option value="Baik">Baik</option>
+                    <option value="Rusak">Rusak</option>
+                    <option value="Repair">Repair</option>
+                </select>
+                <button type="submit">Simpan ke Inventory</button>
+            </form>
+            <div id="alertBox" class="alert" style="display:none;"></div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 PortoFolio — Junior Programming LSP</p>
+    </footer>
+
+<script src="main.js"></script>
+</body>
+</html>
